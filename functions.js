@@ -1,23 +1,31 @@
-var csv = require('jquery-csv');
+// import Papa from 'papaparse';
 
-// $(document).ready(function () {
-//     $.get('guest-list-test.csv', function (data) {
-//         const parsedData = $.csv.toObjects(data);
-//         parsedData.forEach(row => {
-//             const { guest, plusOne, children} = row;
-//             $('#csv-data').append('<p> Name: ${guest}, Plus One: ${children}</p>')
-//         })
-//     })
-// })
+// const csv = Papa.unparse('guest-list-test.csv')
 
-$.get( "guest-list-test.csv", function( CSVdata) {
-    // CSVdata is populated with the file contents...
-    // ...ready to be converted into an Array
-     data = $.csv.toArray(CSVdata);
-     console.log(data)
- });
+// Function to take user input name and spit out plus ones for RSVP form
+function csvData(inputName, callback) {
+    // Load the CSV file
+    $.get('guest-list-test.csv', function (data) {
+        // Parse the CSV using jquery-csv
+        const parsedData = $.csv.toObjects(data); // Convert CSV rows to an array of objects
+        let hasPlusOne = false;
+        // Display the data or process it further
+        parsedData.forEach(row => {
+            const { guest, plusOne, children } = row;
+            if (guest === inputName && plusOne) {
+                hasPlusOne = plusOne === "TRUE";
+                $('#csv-data').html(`
+                    <p>Will ${children} be attending?</p>
+                `);
+                }
+            });
+            callback(hasPlusOne);
+        }).fail(function() {
+        console.error('Failed to load authentication data.')
+    });
 
-$.csv.toArray("guest-list-test.csv")
+};
+
 
 // Mock database 
 const plusOneTable = {
@@ -51,14 +59,18 @@ function handleRsvpForm() {
     nameField.value = userName;
 
     // Check if the user has a plus one based on the mock table
-    const hasPlusOne = plusOneTable[userName];
+    // const hasPlusOne = plusOneTable[userName];
+    // const hasPlusOne = csvData(userName);
+    csvData(userName, function(hasPlusOne) {
+        if (hasPlusOne) {
+            plusOneSelect.style.display = 'block';
+        } else {
+            plusOneSelect.style.display = 'none';
+        }
+    })
 
     // Show or hide the plus one question based on the database check
-    if (hasPlusOne) {
-        plusOneSelect.style.display = 'block';
-    } else {
-        plusOneSelect.style.display = 'none';
-    }
+    
 
     // Handle form submission
     form.addEventListener('submit', function(event) {

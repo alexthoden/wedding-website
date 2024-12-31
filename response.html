@@ -15,7 +15,8 @@
             <label for="name">Your Name:</label>
             <input type="text" id="name" name="name" disabled>
 
-            <label for="plus-one-attending">Will your plus one be attending?</label>
+            <div id = "csv-data">Name</div>
+            <label id = "csv-data-label" for="plus-one-attending"></label>
             <select id="plus-one-attending" name="plus-one-attending" required>
                 <option selected disabled hidden>-- select option --</option>
                 <option value="yes">Yes</option>
@@ -27,6 +28,7 @@
     </div>
 
     <script src="functions.js"></script>
+    <script src="sandbox/parse-csv.js"></script>
 
 </body>
 </html>
