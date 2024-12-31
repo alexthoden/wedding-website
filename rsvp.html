@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RSVP</title>
     <link rel="stylesheet" href="styles.css">
+    <script type = 'text/javascript' src = "functions.jsx"></script>
 </head>
 <body>
     <nav class = "navbar">
@@ -16,36 +17,26 @@
         </ul>
     </nav>
     <header class="hero">
-        <h1>RSVP to Our Wedding</h1>
-        <p>We can’t wait to celebrate with you!</p>
+        <!-- <h1>RSVP to Our Wedding</h1>
+        <p>We can’t wait to celebrate with you!</p> -->
     </header>
 
     <main>
-        <section class="form-section">
-            <form action="#" method="post">
-                <label for="name">Full Name:</label>
+        <div class="name-input-section">
+            <h2>Enter Your Name</h2>
+            <form id="name-form">
+                <label for="name">Your Name:</label>
                 <input type="text" id="name" name="name" required>
-                
-                <label for="email">Email Address:</label>
-                <input type="email" id="email" name="email" required>
-
-                <label for="response">Response:</label>
-                <select type="response" id="response" name="response" required>
-                    <option selected disabled hidden>-- select option --</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                </select>
-
-                <label for="guests">Number of Guests:</label>
-                <input type="number" id="guests" name="guests" min="1" max="10" required>
-                
-                
-                <button type="submit" class="button">Submit</button>
+                <button type="submit">Next</button>
             </form>
-        </section>
+        </div>
+    
     </main>
-    <footer>
+    <!-- <footer>
         <p>&copy; 2024 Our Wedding. All Rights Reserved.</p>
-    </footer>
+    </footer> -->
+    <script src="functions.js"></script>
+
+    
 </body>
 </html>

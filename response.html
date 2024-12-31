@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSVP Form</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type = 'text/javascript' src = "functions.jsx"></script>
+</head>
+<body>
+
+    <div class="rsvp-section">
+        <h2>RSVP</h2>
+        <form id="rsvp-form">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" disabled>
+
+            <label for="plus-one-attending">Will your plus one be attending?</label>
+            <select id="plus-one-attending" name="plus-one-attending" required>
+                <option selected disabled hidden>-- select option --</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script src="functions.js"></script>
+
+</body>
+</html>
