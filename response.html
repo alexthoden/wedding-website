@@ -15,13 +15,30 @@
             <label for="name">Your Name:</label>
             <input type="text" id="name" name="name" disabled>
 
-            <p id = "doodoo">Name</p>
-            <label id = "csv-data-label" for="plus-one-attending"></label>
+            <label id = "guest-rsvp" for="guest-attending">Will you be attending?</label>
+            <select id="guest-attending" name="guest-attending" required>
+                <option selected disabled hidden>-- select option --</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <label id = "plus1" for="plus-one-attending"></label>
             <select id="plus-one-attending" name="plus-one-attending" required>
                 <option selected disabled hidden>-- select option --</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
             </select>
+
+            <label id = "logding" for="guest-lodging">Will you be staying at the hotel?</label>
+            <select id="guest-lodging" name="guest-lodging" required>
+                <option selected disabled hidden>-- select option --</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+
+            </select>
+
+            <label id = "allergies" for="list-allergies">Please list any food preferences/allergies you have</label>
+            <input type="text" id="list-allergies" name="list-allergies">
 
             <button type="submit">Submit</button>
         </form>

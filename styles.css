@@ -9,16 +9,23 @@ body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     color: #333;
     line-height: 1.6;
-    background-color: #f9f9f9;
+    background-color: #c0e6c0;
     margin: 0;
     padding: 0;
+}
+
+h1 {
+    font-size: min(35px, 4vw);
+    margin: auto;
+    width: 50%;
+    text-align: center;
 }
 
 header {
     text-align: center;
     background: url('hero-image.jpg') no-repeat center center/cover;
     color: #fff;
-    padding: 8rem 2rem;
+    padding: 8vw 2vw;
     position: relative;
 }
 
@@ -34,14 +41,14 @@ header::after {
 }
 
 header h1 {
-    font-size: 3.5rem;
+    font-size: calc(1em + 1vw);
     z-index: 2;
     position: relative;
 }
 
 header p {
-    font-size: 1.5rem;
-    margin: 1rem 0;
+    font-size: min(1.5vw);
+    margin: 1vw 0;
     z-index: 2;
     position: relative;
 }
@@ -50,17 +57,17 @@ nav ul {
     list-style: none;
     display: flex;
     justify-content: center;
-    gap: 2rem;
-    margin-top: 2rem;
+    gap: 2vw;
+    margin-top: 2vw;
     z-index: 2;
     position: relative;
 }
 
 nav ul li a {
     text-decoration: none;
-    color: #fff;
+    color: #ffffff;
     font-weight: bold;
-    font-size: 1.1rem;
+    font-size: min(18px, 2.5vw);
     transition: color 0.3s;
 }
 
@@ -68,52 +75,60 @@ nav ul li a:hover {
     color: #ff6363;
 }
 
+div.centered {
+    font-size: min(60px, 4vw);
+}
+
 /* Main Content Styling */
 main {
-    padding: 4rem 2rem;
+    padding: 4vw 2vw;
 }
 
 section {
-    margin-bottom: 4rem;
+    margin-bottom: 4vw;
 }
 
 h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
+    font-size: min(30px, 3.5vw);
+    margin-bottom: 1.5vw;
     text-align: center;
     color: #333;
 }
 
 p {
-    margin-bottom: 1rem;
+    margin-bottom: 1vw;
     text-align: center;
     color: #666;
 }
 
+section.details {
+    font-size: min(20px, 2vw);
+}
+
 /* Event Details Section */
 .event-details {
-    margin: 1rem auto;
+    margin: 1vw auto;
     max-width: 600px;
     text-align: center;
     border-bottom: 1px solid #ddd;
-    padding-bottom: 2rem;
+    padding-bottom: 2vw;
 }
 
 .event-details h3 {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.8vw;
+    margin-bottom: 0.5vw;
 }
 
 .event-details p {
-    font-size: 1rem;
+    font-size: 1vw;
 }
 
 /* Gallery Styling */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
+    gap: 2vw;
+    margin-top: 2vw;
 }
 
 .gallery-grid img {
@@ -128,14 +143,14 @@ form {
     max-width: 600px;
     margin: auto;
     background: #fff;
-    padding: 2rem;
+    padding: 2vw;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 form label {
     display: block;
-    margin: 1rem 0 0.5rem;
+    margin: 1vw 0 0.5vw;
     font-weight: bold;
     color: #333;
 }
@@ -144,21 +159,21 @@ form input,
 form textarea, 
 form select {
     width: 100%;
-    padding: 0.8rem;
-    margin-bottom: 1rem;
+    padding: 0.8vw;
+    margin-bottom: 1vw;
     border: 1px solid #ddd;
     border-radius: 4px;
-    font-size: 1rem;
+    font-size: min(20px, 3vw);
 }
 
 form button {
     display: block;
     width: 100%;
-    padding: 1rem;
+    padding: 1vw;
     border: none;
     background: #ff6363;
     color: #fff;
-    font-size: 1.2rem;
+    font-size: min(20px, 3vw);
     border-radius: 4px;
     cursor: pointer;
     transition: background 0.3s;
@@ -171,36 +186,37 @@ form button:hover {
 /* Footer Styling */
 footer {
     text-align: center;
-    padding: 2rem 0;
+    padding: 2vw 0;
     background: #333;
     color: #fff;
 }
 
 footer p {
     margin: 0;
-    font-size: 1rem;
+    font-size: 1vw;
 }
 
+
 /* Responsiveness */
-@media (max-width: 768px) {
+@media (man-width: 1200px) {
     header h1 {
-        font-size: 2.5rem;
+        font-size: 2.5vw;
     }
 
     header p {
-        font-size: 1.2rem;
+        font-size: 1.2vw;
     }
 
     nav ul {
         flex-direction: column;
-        gap: 1rem;
+        gap: 1vw;
     }
 }
 
 .container {
     position: relative;
     text-align: center;
-    color: white;
+    color: rgb(255, 255, 255);
   }
 
 
@@ -219,7 +235,7 @@ footer p {
 /* Navbar */
 .navbar {
     position: absolute; 
-    top: 20px; 
+    top: min(20px, 1vw); 
     right: 20px; 
 }
 
@@ -227,33 +243,35 @@ footer p {
     list-style: none;
     list-style-type: none;
     display: flex;
-    gap: 20px; /* Space between the nav items */
+    gap: min(1px, 1vw); /* Space between the nav items */
     margin: 0;
     padding: 0;
 }
 
 .navbar ul li {
     display: inline;
+    /* padding: ; */
 }
 
 .navbar ul li a {
     text-decoration: none;
     color: #333;
-    padding: 10px 15px;
+    padding: min(10px, 1vw);
     border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.4);
     transition: background-color 0.3s;
 }
 
 .navbar ul li a:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* Highlight on hover */
+    background-color: rgba(255, 255, 255, 0.9); /* Highlight on hover */
 }
 
 .bold-item {
     font-weight: bold;
 }
 
-.active {
-    background: rgba(255, 255, 255, 0.5);
+.navbar ul li a.active {
+    background: rgba(192, 230, 192, 0.541);
 }
 
 .not-bold {

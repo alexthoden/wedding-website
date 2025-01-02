@@ -1,38 +1,3 @@
-// import Papa from 'papaparse';
-// var csv = require('jquery-csv');
-// const csv = Papa.unparse('guest-list-test.csv')
-
-// Function to take user input name and spit out plus ones for RSVP form
-function csvData(inputName, callback) {
-    // Load the CSV file
-    $.get('guest-list-test.csv', function (data) {
-        // Parse the CSV using jquery-csv
-        const parsedData = $.csv.toObjects(data); // Convert CSV rows to an array of objects
-        let hasPlusOne = false;
-        // Display the data or process it further
-        parsedData.forEach(row => {
-            const { guest, plusOne, children } = row;
-            if (guest === inputName && plusOne) {
-                hasPlusOne = plusOne === "TRUE";
-                $('#csv-data').append(`
-                    <p>Will ${children} be attending?</p>
-                `);
-                }
-            });
-            callback(hasPlusOne);
-        }).fail(function() {
-        console.error('Failed to load authentication data.')
-    });
-
-};
-
-
-// Mock database 
-const plusOneTable = {
-    'Alice': true,  // Alice has a plus one
-    'Bob': false,   // Bob does not have a plus one
-    'Charlie': true // Charlie has a plus one
-};
 
 // This function handles the first page (name input)
 function handleNameInputForm() {
@@ -57,23 +22,20 @@ function handleNameInputForm() {
 
 
 
-
-
-
-
 // This function handles the RSVP form page
 function handleRsvpForm() {
     const userName = localStorage.getItem('userName');
     const nameField = document.getElementById('name');
     const plusOneSelect = document.getElementById('plus-one-attending');
     const form = document.getElementById('rsvp-form');
-    const plusOneName = document.getElementById("doodoo");
+    const plusOneName = document.getElementById("plus1");
+
 
     // Pre-fill the user's name in the form
     nameField.value = userName;
 
     // Check if the user has a plus one based on the mock table
-    const hasPlusOne = plusOneTable[userName];
+    
     
     fetch('guest-list-test.csv')
     .then(response => response.text())
@@ -87,31 +49,42 @@ function handleRsvpForm() {
         // Process the data rows
         const dataRows = rows.slice(1);
 
-        // Define the name to search for
-        const targetName = "Beth";
-
         // Find the row where the "Name" column matches the target name
         const targetRow = dataRows.find(row => {
             const columns = row.split(',');
-            const nameIndex = headers.indexOf('guest'); // Get the index of the "Name" column
-            return columns[nameIndex] === targetName;
+            const nameIndex = headers.indexOf('guest'); // Get the index of the "guest" column
+            return columns[nameIndex] === userName;
         });
 
 
         if (targetRow) {
             // Split the matching row into columns
             const columns = targetRow.split(',');
+            const bool = columns[1];
+            if (bool === "TRUE") {
+                // Get the value from the third column (index 2)
+                const valueFromColumn3 = columns[2].replace('"', ''); // Index 2 corresponds to column 3
 
-            // Get the value from the third column (index 2)
-            const valueFromColumn3 = columns[2]; // Index 2 corresponds to column 3
+                // Update form with plus ones if applicable
+                plusOneName.innerHTML = `Will ${valueFromColumn3} be attending?`
+                const hasPlusOne = true;
+            }
+            else {
+                plusOneName.remove();
+                plusOneSelect.remove();
+                const hasPlusOne = false;
+            }
 
-            // Update form with plus ones if applicable
-            plusOneName.innerHTML = valueFromColumn3
+            
+            
 
             return valueFromColumn3; // Return the value
         } else {
-            console.log(`Name "${targetName}" not found in the CSV.`);
+            console.log(`Name "${userName}" not found in the CSV.`);
+            plusOneName.innerHTML = "You're not invited get out of here!"
             return null; // Return null if no match is found
+            const hasPlusOne = false;
+
         }
 
     })
