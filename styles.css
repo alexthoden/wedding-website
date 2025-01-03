@@ -96,6 +96,7 @@ h2 {
     margin-bottom: 1.5vw;
     text-align: center;
     color: #333;
+    font-family: Quicksand;
 }
 
 p {
@@ -343,6 +344,7 @@ ul > li {
     -webkit-flex-direction: row;
     -ms-flex-direction: row;
     flex-direction: row;
+    padding-left: 30px;
     margin: 52px auto 20px;
 }
 
@@ -386,3 +388,11 @@ ul > li {
     padding: 20px 0 20px 72px;
     width: 315px;
 }
+
+.middle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
