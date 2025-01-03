@@ -33,6 +33,7 @@ function handleRsvpForm() {
 
     // Pre-fill the user's name in the form
     nameField.value = userName;
+    console.log(userName);
 
     // Check if the user has a plus one based on the mock table
     
@@ -80,8 +81,10 @@ function handleRsvpForm() {
 
             return valueFromColumn3; // Return the value
         } else {
+            window.location.href = "index.html"; // Redirect to RSVP page
+
             console.log(`Name "${userName}" not found in the CSV.`);
-            plusOneName.innerHTML = "You're not invited get out of here!"
+
             return null; // Return null if no match is found
             const hasPlusOne = false;
 
