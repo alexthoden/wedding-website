@@ -20,6 +20,20 @@ function handleNameInputForm() {
     })
 }
 
+// splits plus ones
+function checkAndSplitString(inputString) {
+    // Check if the string contains the substring "|"
+    if (inputString.includes('|')) {
+        // Split the string on "|"
+        const splitArray = inputString.split('|');
+        console.log("The string contains '|' and has been split:", splitArray);
+        return splitArray; // Return the split array
+    } else {
+        console.log("The string does not contain '|'.");
+        return inputString; // Return the original string if no "|" is found
+    }
+}
+
 // Function to update the CSV
 function updateCsv(userName, responses) {
     fetch('guest-list-test.csv')
