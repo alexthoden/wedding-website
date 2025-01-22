@@ -20,18 +20,132 @@ function handleNameInputForm() {
     })
 }
 
+document.addEventListener('DOMContentLoaded', init, false);
+function init(){
+  function message () {
+    alert("Hello!");
+  }
+    const hamburger = document.getElementById("hamburger");
+    const navbar = document.getElementById("navbar-id");
+
+    if (!hamburger || !navbar) {
+    console.error("Could not find elements with IDs 'hamburger' or 'navbar'.");
+    return; // Exit if either element is missing
+    }
+    if (!hamburger || !navbar) return;
+    hamburger.addEventListener("click", () => {
+    console.log("start");
+    if (navbar.style.display === "none" || navbar.style.display === "") {
+        navbar.style.display = "block";
+        console.log("if");
+    } else {
+        navbar.style.display = "none";
+        console.log("else");
+    }
+    console.log("end", navbar.style.display);
+    });
+    document.addEventListener('click', (event) => {
+        // Check if the clicked element is outside the navbar
+        if (!navbar.contains(event.target) && !hamburger.contains(event.target)) {
+          if (navbar.style.display = "block") {
+            navbar.style.display = "none";
+            
+          }
+        }
+      });
+};
+
+
+
+
+
 // splits plus ones
 function checkAndSplitString(inputString) {
     // Check if the string contains the substring "|"
+    const container = document.getElementById('plus-one-section');
+
     if (inputString.includes('|')) {
         // Split the string on "|"
         const splitArray = inputString.split('|');
         console.log("The string contains '|' and has been split:", splitArray);
-        return splitArray; // Return the split array
+
+
+        // Clear the container (optional, in case you're re-rendering)
+        // container.innerHTML = '';
+
+        splitArray.forEach((item, index) => {
+            
+            const itemLabel = document.createElement('label');
+            itemLabel.className = 'plus-one-label'; // Add a class for styling if needed
+            itemLabel.textContent = `Will ${item.trim()} be attending?`
+            container.appendChild(itemLabel);
+
+
+            const itemSelect = document.createElement('select');
+            itemSelect.className = 'plus-one-select';
+            itemSelect.id = `plus-${index + 1}-attending`;
+            itemSelectname = `plus-${index + 1}-attending`;
+            itemSelect.required = true;
+
+            const defaultOption = document.createElement('option');
+            defaultOption.textContent = '-- select option --'; 
+            defaultOption.disabled = true;
+            defaultOption.hidden = true;
+            defaultOption.selected = true;
+            itemSelect.appendChild(defaultOption);
+
+            const yesOption = document.createElement('option');
+            yesOption.value = 'yes';
+            yesOption.textContent = 'Yes';
+            itemSelect.appendChild(yesOption);
+
+            const noOption = document.createElement('option');
+            noOption.value = 'no';
+            noOption.textContent = 'No';
+            itemSelect.appendChild(noOption);
+
+            container.appendChild(itemSelect);
+        });
+
+        // return splitArray; // Return the split array
     } else {
         console.log("The string does not contain '|'.");
-        return inputString; // Return the original string if no "|" is found
+
+        const itemLabel = document.createElement('label');
+        itemLabel.className = 'plus-one-label'; // Add a class for styling if needed
+        itemLabel.textContent = `Will ${inputString} be attending?`
+        container.appendChild(itemLabel);
+
+
+        const itemSelect = document.createElement('select');
+        itemSelect.className = 'plus-one-select';
+        itemSelect.id = `plus-one-attending`;
+        itemSelect.name = `plus-one-attending`;
+        itemSelect.required = true;
+        console.log(itemSelect);
+
+        const defaultOption = document.createElement('option');
+        defaultOption.textContent = '-- select option --'; 
+        defaultOption.disabled = true;
+        defaultOption.hidden = true;
+        defaultOption.selected = true;
+        itemSelect.appendChild(defaultOption);
+
+        const yesOption = document.createElement('option');
+        yesOption.value = 'yes';
+        yesOption.textContent = 'Yes';
+        itemSelect.appendChild(yesOption);
+
+        const noOption = document.createElement('option');
+        noOption.value = 'no';
+        noOption.textContent = 'No';
+        itemSelect.appendChild(noOption);
+
+        container.appendChild(itemSelect);
+
     }
+
+    
 }
 
 // Function to update the CSV
@@ -130,9 +244,11 @@ function handleRsvpForm() {
                 // Get the value from the third column (index 2)
                 const valueFromColumn3 = columns[2].replace('"', ''); // Index 2 corresponds to column 3
 
+                checkAndSplitString(valueFromColumn3)
+
                 // Update form with plus ones if applicable
-                plusOneName.innerHTML = `Will ${valueFromColumn3} be attending?`
-                const hasPlusOne = true;
+                // plusOneName.innerHTML = `Will ${valueFromColumn3} be attending?`
+                // const hasPlusOne = true;
             }
             else {
                 plusOneName.remove();
