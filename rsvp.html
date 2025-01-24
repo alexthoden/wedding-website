@@ -13,11 +13,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="images/L_A logo.svg">
 
 
 </head>
 <body>
-    <nav class = "navbar">
+    <button class="hamburger" id="hamburger">
+        &#9776; <!-- Hamburger icon -->
+    </button>
+    <nav class="navbar-class" id="navbar-id">
         <ul class = "navbar">
             <li><a href="index.html" class = "not-bold">Home</a></li>
             <li><a href="itinerary.html" class = "not-bold">Itinerary</a></li>
@@ -34,7 +38,7 @@
 
     <main>
         <div class="name-input-section">
-            <h2>Enter Your Name</h2>
+            <h2 class="form-header">Enter Your Name</h2>
             <form id="name-form">
                 <label for="name">Your Name:</label>
                 <input type="text" id="name" name="name" required>
