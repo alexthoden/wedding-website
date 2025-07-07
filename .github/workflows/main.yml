@@ -12,6 +12,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build
+      run: npm run build
+
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v2
       with:
@@ -21,4 +27,4 @@ jobs:
 
     - name: Deploy static site to S3 bucket
       run: |
-          aws s3 sync . s3://thoden-woodward-wedding --exclude '.git/*' --exclude '.github/*' --delete
+        aws s3 sync dist/ s3://thoden-woodward-wedding --delete
