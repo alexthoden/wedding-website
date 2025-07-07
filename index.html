@@ -1,66 +1,27 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lauren & Alex</title>
-    <link rel="stylesheet" href="styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lauren & Alex's Wedding</title>
+    <meta name="description" content="Join us for our special day - Lauren & Alex's Wedding" />
+    <meta name="author" content="Lauren & Alex" />
+    
+    <link rel="icon" type="image/x-icon" href="public/images/L_A logo.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="images/L_A logo.svg">
-</head>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<body>
-    <div class="container" id="container">
-        <button class="hamburger" id="hamburger">
-            &#9776; <!-- Hamburger icon -->
-        </button>
-        <img src="images/venue_watercolor.jpg" id="venue" style="width:100%">
-        <!-- <header> -->
-            <nav class="navbar-class" id="navbar-id">
-                <ul class="navbar">
-                    <li><a href="index.html" class="active not-bold">Home</a></li>
-                    <li><a href="itinerary.html" class="not-bold">Itinerary</a></li>
-                    <li><a href="photos.html" class="not-bold">Photos</a></li>
-                    <li><a href="registry.html" class="not-bold">Registry</a></li>
-                    <li><a href="faq.html" class="not-bold">FAQ</a></li>
-                    <li><a href="rsvp.html">RSVP</a></li>
-                </ul>
-            </nav>
-        <!-- </header> -->
+    <meta property="og:title" content="Lauren & Alex's Wedding" />
+    <meta property="og:description" content="Join us for our special day" />
+    <meta property="og:type" content="website" />
 
-        <div class="centered">Lauren & Alex</div>
-    </div>
-    <div class="background-flowers">
-        <img src="images/test_flowers.png" id="flowers-backround-id" style="width:100%">
-        <div class = "transparent-box">
-            <div class="centered-bottom">
-                <div class="css-9ggenr">
-                    <div class="css-v0tzgb">
-                        <div class="css-1e30inf">
-                            <span>August 28, 2026</span>
-                        </div>
-                    </div>
-                    <div class="css-19cvhdm">
-                        <div class="css-1e30inf">Bluemont<br> VA</div>
-                    </div>
-                </div>
-                <main>
-                    <section class="details">
-                        <h2>Event Details</h2>
-                        <p>Date: August 28, 2026</p>
-                        <p>Location: The View at Bluemont</p>
-                        <p>Address: 19729 Ridgeside Rd, Bluemont, VA 20135</p>
-                        <p>Time: 5:00 PM</p>
-                    </section>
-                </main>
-            </div>
-        </div>
-    </div>
-</body>
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
 
-<script src="functions.js"></script>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
