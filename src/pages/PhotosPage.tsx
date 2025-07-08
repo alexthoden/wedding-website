@@ -2,16 +2,16 @@ import { useState } from 'react';
 import { Camera } from 'lucide-react';
 
 const photoGallery = [
-  { id: 1, src: '/images/snowboarding_Jan2019.jpg', alt: 'Snowboarding Jan 2019', caption: 'Snowboarding, Jan 2019', date: 'Jan 2019', month: 1, year: 2019 },
-  { id: 2, src: '/images/formals_May2019.JPG', alt: 'Formals May 2019', caption: 'Formals, May 2019', date: 'May 2019', month: 5, year: 2019 },
-  { id: 3, src: '/images/hiking_Oct2020.JPG', alt: 'Hiking Oct 2020', caption: 'Hiking, Oct 2020', date: 'Oct 2020', month: 10, year: 2020 },
-  { id: 4, src: '/images/beach_Jun2021.JPG', alt: 'Beach June 2021', caption: 'Beach, June 2021', date: 'Jun 2021', month: 6, year: 2021 },
-  { id: 5, src: '/images/formals_Nov2021.HEIC', alt: 'Formals Nov 2021', caption: 'Formals, Nov 2021', date: 'Nov 2021', month: 11, year: 2021 },
+  { id: 1, src: '/images/snowboarding_Jan2019.jpg', alt: 'Snowboarding Jan 2019', caption: "Shreddin'", date: 'Jan 2019', month: 1, year: 2019 },
+  { id: 2, src: '/images/formals_May2019.JPG', alt: 'Formals May 2019', caption: 'Formals', date: 'May 2019', month: 5, year: 2019 },
+  { id: 3, src: '/images/hiking_Oct2020.JPG', alt: 'Hiking Oct 2020', caption: "Lauren's last hike", date: 'Oct 2020', month: 10, year: 2020 },
+  { id: 4, src: '/images/beach_Jun2021.JPG', alt: 'Beach June 2021', caption: 'Beach', date: 'Jun 2021', month: 6, year: 2021 },
+  { id: 5, src: '/images/formals_Nov2021.HEIC', alt: 'Formals Nov 2021', caption: 'Cover of Vogue Magazine', date: 'Nov 2021', month: 11, year: 2021 },
   { id: 6, src: '/images/wisconsin.JPG', alt: 'Wisconsin', caption: 'Wisconsin', date: 'Jun 2021', month: 6, year: 2021 },
-  { id: 7, src: '/images/Beach_Jun2022.JPG', alt: 'Beach June 2022', caption: 'Beach, June 2022', date: 'Jun 2022', month: 6, year: 2022 },
-  { id: 8, src: '/images/Rome_May2022.JPG', alt: 'Rome May 2022', caption: 'Rome, May 2022', date: 'May 2022', month: 5, year: 2022 },
-  { id: 9, src: '/images/Engaged_July2024.HEIC', alt: 'Engaged July 2024', caption: 'Engaged, July 2024', date: 'Jul 2024', month: 7, year: 2024 },
-  { id: 10, src: '/images/Ivy_blacksburg_Nov2024.JPG', alt: 'Ivy Blacksburg Nov 2024', caption: 'Ivy in Blacksburg, Nov 2024', date: 'Nov 2024', month: 11, year: 2024 },
+  { id: 7, src: '/images/Beach_Jun2022.JPG', alt: 'Beach June 2022', caption: 'Corolla, NC', date: 'Jun 2022', month: 6, year: 2022 },
+  { id: 8, src: '/images/Rome_May2022.JPG', alt: 'Rome May 2022', caption: 'Visiting the Gladiators', date: 'May 2022', month: 5, year: 2022 },
+  { id: 9, src: '/images/Engaged_July2024.HEIC', alt: 'Engaged July 2024', caption: 'Engaged!', date: 'Jul 2024', month: 7, year: 2024 },
+  { id: 10, src: '/images/Ivy_blacksburg_Nov2024.JPG', alt: 'Ivy Blacksburg Nov 2024', caption: "Ivy's first football game!", date: 'Nov 2024', month: 11, year: 2024 },
 ];
 
 // Helper to group by 3-month periods
@@ -52,7 +52,7 @@ const PhotosPage = () => {
     <section className="py-20 bg-gradient-to-br from-wedding-cream to-wedding-peach min-h-screen">
       <div className="container mx-auto px-4 flex flex-row">
         {/* Timeline (syncs with photos) */}
-        <aside className="hidden md:block pr-8 w-1/4" style={{ marginTop: '300px' }}>
+        {/* <aside className="hidden md:block pr-8 w-1/4" style={{ marginTop: '300px' }}>
           <div className="flex flex-col gap-6">
             {flatPhotos.map((photo, idx) => (
               <div key={photo.id} className="flex flex-col items-end min-h-[220px] justify-center">
@@ -61,7 +61,7 @@ const PhotosPage = () => {
               </div>
             ))}
           </div>
-        </aside>
+        </aside> */}
         {/* Gallery */}
         <div className="w-full md:w-3/4 max-w-6xl mx-auto">
           <div className="text-center mb-12">
@@ -98,7 +98,7 @@ const PhotosPage = () => {
                 We'd love to see your photos from our special day! 
               </p>
               <p className="text-wedding-sage font-medium">
-                Use #LaurenAndAlexWedding on social media
+                Use #IJustSawLaurenAndAlexGetMarriedHolyShit on social media
               </p>
             </div>
           </div>

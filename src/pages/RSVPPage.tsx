@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -7,16 +6,16 @@ import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { Heart, Send, AlertCircle, Edit } from 'lucide-react';
+import { Send, AlertCircle, Edit } from 'lucide-react';
 import { loadGuestList, findGuestByEmail, Guest } from '@/utils/guestList';
 import { supabase } from '@/integrations/supabase/client';
 
 interface RSVPFormData {
   name: string;
   email: string;
-  attendance: string;
-  guests: string;
+  attendance: Record<string, string>;
   dietaryRestrictions: string;
+  accommodation: string;
   message: string;
 }
 
@@ -24,10 +23,11 @@ interface ExistingResponse {
   id: string;
   guest_email: string;
   guest_name: string;
-  attendance: string;
-  number_of_guests: number;
+  attendance: Record<string, string>;
   dietary_restrictions: string | null;
+  accommodation: string | null;
   message: string | null;
+  group_id: string;
 }
 
 const RSVPPage = () => {
@@ -38,9 +38,9 @@ const RSVPPage = () => {
   const [formData, setFormData] = useState<RSVPFormData>({
     name: '',
     email: '',
-    attendance: '',
-    guests: '1',
+    attendance: {},
     dietaryRestrictions: '',
+    accommodation: '',
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -52,18 +52,18 @@ const RSVPPage = () => {
   }, []);
 
   const checkExistingResponse = async (email: string) => {
+    const guest = findGuestByEmail(guestList, email);
+    if (!guest) return null;
     try {
       const { data, error } = await supabase
         .from('rsvp_responses')
         .select('*')
-        .eq('guest_email', email.toLowerCase())
+        .eq('group_id', String(guest.group_id))
         .maybeSingle();
-
       if (error) {
         console.error('Error checking existing response:', error);
         return null;
       }
-
       return data;
     } catch (error) {
       console.error('Error checking existing response:', error);
@@ -97,13 +97,16 @@ const RSVPPage = () => {
     setEmailVerified(true);
     
     if (existing) {
-      setExistingResponse(existing);
-      setFormData(prev => ({ 
-        ...prev, 
+      setExistingResponse({
+        ...existing,
+        attendance: typeof existing.attendance === 'string' ? JSON.parse(existing.attendance) : existing.attendance
+      });
+      setFormData(prev => ({
+        ...prev,
         name: existing.guest_name,
-        attendance: existing.attendance,
-        guests: existing.number_of_guests.toString(),
+        attendance: typeof existing.attendance === 'string' ? JSON.parse(existing.attendance) : existing.attendance,
         dietaryRestrictions: existing.dietary_restrictions || '',
+        accommodation: existing.accommodation || '',
         message: existing.message || ''
       }));
       
@@ -114,8 +117,7 @@ const RSVPPage = () => {
     } else {
       setFormData(prev => ({ 
         ...prev, 
-        name: guest.name,
-        guests: guest.invited_guests.toString()
+        name: guest.name
       }));
       
       toast({
@@ -140,9 +142,9 @@ const RSVPPage = () => {
       return;
     }
 
-    if (!formData.attendance) {
+    if (Object.keys(formData.attendance).length === 0) {
       toast({
-        title: "Please select your attendance status",
+        title: "Please select the attendance status for each guest",
         variant: "destructive"
       });
       return;
@@ -154,11 +156,12 @@ const RSVPPage = () => {
       const responseData = {
         guest_email: formData.email.toLowerCase(),
         guest_name: formData.name,
-        attendance: formData.attendance,
-        number_of_guests: parseInt(formData.guests) || 1,
+        attendance: formData.attendance, // store as jsonb
         dietary_restrictions: formData.dietaryRestrictions || null,
+        accommodation: formData.accommodation || null,
         message: formData.message || null,
-        updated_at: new Date().toISOString()
+        updated_at: new Date().toISOString(),
+        group_id: currentGuest?.group_id || null
       };
 
       let result;
@@ -188,9 +191,9 @@ const RSVPPage = () => {
       setFormData({
         name: '',
         email: '',
-        attendance: '',
-        guests: '1',
+        attendance: {},
         dietaryRestrictions: '',
+        accommodation: '',
         message: ''
       });
       setEmailVerified(false);
@@ -218,12 +221,11 @@ const RSVPPage = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
-            <Heart className="w-12 h-12 text-wedding-coral mx-auto mb-4" />
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-wedding-coral mb-4">
               RSVP
             </h2>
             <p className="text-gray-600 text-lg">
-              Please let us know if you'll be joining us for our special day
+              Please let us know if you'll be joining us!
             </p>
           </div>
 
@@ -292,14 +294,16 @@ const RSVPPage = () => {
                     </div>
                     {existingResponse.attendance === 'yes' && (
                       <>
-                        <div>
-                          <p className="font-medium text-gray-700">Number of Guests:</p>
-                          <p className="text-gray-600">{existingResponse.number_of_guests}</p>
-                        </div>
                         {existingResponse.dietary_restrictions && (
                           <div>
                             <p className="font-medium text-gray-700">Dietary Restrictions:</p>
                             <p className="text-gray-600">{existingResponse.dietary_restrictions}</p>
+                          </div>
+                        )}
+                        {existingResponse.accommodation && (
+                          <div>
+                            <p className="font-medium text-gray-700">Accommodation:</p>
+                            <p className="text-gray-600">{existingResponse.accommodation}</p>
                           </div>
                         )}
                       </>
@@ -331,47 +335,36 @@ const RSVPPage = () => {
                     </p>
                   </div>
 
-                  <div>
-                    <Label className="text-wedding-coral font-medium mb-3 block">
-                      Will you be attending? *
-                    </Label>
-                    <RadioGroup
-                      value={formData.attendance}
-                      onValueChange={(value) => handleInputChange('attendance', value)}
-                      className="flex space-x-6"
-                    >
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="yes" id="yes" className="border-wedding-coral" />
-                        <Label htmlFor="yes" className="text-gray-700">
-                          Yes, I'll be there!
+                  {currentGuest && guestList
+                    .filter(g => String(g.group_id) === String(currentGuest.group_id))
+                    
+                    .map((guest) => (
+                      <div key={guest.email} className="mb-4">
+                        <Label className="text-wedding-coral font-medium mb-2 block">
+                          Will {guest.name} be attending?
                         </Label>
+                        <RadioGroup
+                          value={formData.attendance[guest.email] || ''}
+                          onValueChange={(value) => setFormData(prev => ({
+                            ...prev,
+                            attendance: { ...prev.attendance, [guest.email]: value }
+                          }))}
+                          className="flex space-x-6"
+                        >
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="yes" id={`yes-${guest.email}`} className="border-wedding-coral" />
+                            <Label htmlFor={`yes-${guest.email}`}>Yes</Label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="no" id={`no-${guest.email}`} className="border-wedding-coral" />
+                            <Label htmlFor={`no-${guest.email}`}>No</Label>
+                          </div>
+                        </RadioGroup>
                       </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="no" id="no" className="border-wedding-coral" />
-                        <Label htmlFor="no" className="text-gray-700">
-                          Sorry, can't make it
-                        </Label>
-                      </div>
-                    </RadioGroup>
-                  </div>
+                    ))}
 
-                  {formData.attendance === 'yes' && (
+                  {Object.keys(formData.attendance).length > 0 && formData.attendance[Object.keys(formData.attendance)[0]] === 'yes' && (
                     <>
-                      <div>
-                        <Label htmlFor="guests" className="text-wedding-coral font-medium">
-                          Number of Guests (including yourself)
-                        </Label>
-                        <Input
-                          id="guests"
-                          type="number"
-                          min="1"
-                          max={currentGuest?.invited_guests || 1}
-                          value={formData.guests}
-                          onChange={(e) => handleInputChange('guests', e.target.value)}
-                          className="mt-1 border-wedding-peach focus:border-wedding-coral"
-                        />
-                      </div>
-
                       <div>
                         <Label htmlFor="dietary" className="text-wedding-coral font-medium">
                           Dietary Restrictions
@@ -381,6 +374,22 @@ const RSVPPage = () => {
                           value={formData.dietaryRestrictions}
                           onChange={(e) => handleInputChange('dietaryRestrictions', e.target.value)}
                           placeholder="Any allergies or dietary needs?"
+                          className="mt-1 border-wedding-peach focus:border-wedding-coral"
+                        />
+                      </div>
+
+                      <div>
+                        <Label htmlFor="accommodation" className="text-wedding-coral font-medium">
+                          Where are you planning on staying?
+                          <span className="block text-xs text-gray-500 font-normal">
+                            (To help us get an accurate headcount for transportation to/from the hotel)
+                          </span>
+                        </Label>
+                        <Input
+                          id="accommodation"
+                          value={formData.accommodation}
+                          onChange={(e) => handleInputChange('accommodation', e.target.value)}
+                          placeholder="Hotel, Airbnb, with family, etc."
                           className="mt-1 border-wedding-peach focus:border-wedding-coral"
                         />
                       </div>

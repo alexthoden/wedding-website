@@ -1,10 +1,10 @@
-
-name,email,invited_guests
-John Smith,john.smith@email.com,2
-Sarah Johnson,sarah.johnson@email.com,1
-Michael Brown,michael.brown@email.com,4
-Emily Davis,emily.davis@email.com,2
-David Wilson,david.wilson@email.com,3
-Lisa Anderson,lisa.anderson@email.com,1
-Robert Taylor,robert.taylor@email.com,2
-Jennifer Martinez,jennifer.martinez@email.com,1
+name,email,invited_guests,group_id
+John Smith,john.smith@email.com,2,1
+Jane Smith,jane.smith@email.com,2,1
+Sarah Johnson,sarah.johnson@email.com,1,2
+Michael Brown,michael.brown@email.com,4,3
+Emily Davis,emily.davis@email.com,2,4
+David Wilson,david.wilson@email.com,3,5
+Lisa Anderson,lisa.anderson@email.com,1,6
+Robert Taylor,robert.taylor@email.com,2,7
+Jennifer Martinez,jennifer.martinez@email.com,1,8

@@ -1,8 +1,8 @@
-
 export interface Guest {
   name: string;
   email: string;
   invited_guests: number;
+  group_id: string;
 }
 
 export const loadGuestList = async (): Promise<Guest[]> => {
@@ -17,11 +17,12 @@ export const loadGuestList = async (): Promise<Guest[]> => {
     
     for (let i = 1; i < lines.length; i++) {
       const values = lines[i].split(',');
-      if (values.length >= 3) {
+      if (values.length >= 4) {
         guests.push({
           name: values[0].trim(),
           email: values[1].trim(),
-          invited_guests: parseInt(values[2].trim()) || 1
+          invited_guests: parseInt(values[2].trim()) || 1,
+          group_id: values[3].trim()
         });
       }
     }

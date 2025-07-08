@@ -68,22 +68,22 @@ const Home = () => {
               <Card className="bg-white/90 backdrop-blur-sm border-wedding-peach shadow-lg">
                 <CardHeader className="text-center">
                   <Camera className="w-12 h-12 text-wedding-coral mx-auto mb-4" />
-                  <CardTitle className="font-serif text-2xl text-wedding-coral">Reception</CardTitle>
+                  <CardTitle className="font-serif text-2xl text-wedding-coral">Cocktail Hour & Reception</CardTitle>
                 </CardHeader>
                 <CardContent className="text-center space-y-4">
                   <div>
-                    <p className="text-xl font-semibold text-wedding-sage">Same Day</p>
+                    <p className="text-xl font-semibold text-wedding-sage">August 28, 2026</p>
                     <p className="text-gray-600">Following ceremony</p>
                   </div>
                   <div className="flex items-center justify-center space-x-2">
                     <Clock className="w-5 h-5 text-wedding-coral" />
-                    <p className="text-lg">6:00 PM - 11:00 PM</p>
+                    <p className="text-lg">5:00 PM - 11:00 PM</p>
                   </div>
                   <div className="flex items-center justify-center space-x-2">
                     <MapPin className="w-5 h-5 text-wedding-coral" />
                     <p className="text-lg">Banquet Hall</p>
                   </div>
-                  <p className="text-gray-600">Same location</p>
+                  {/* <p className="text-gray-600">Same location</p> */}
                 </CardContent>
               </Card>
             </div>
@@ -95,7 +95,7 @@ const Home = () => {
               <CardContent className="space-y-4">
                 <div>
                   <h4 className="font-semibold text-wedding-sage mb-2">Dress Code</h4>
-                  <p className="text-gray-700">Garden party attire - think floral prints, pastels, and comfortable shoes for walking on grass.</p>
+                  <p className="text-gray-700">Garden party attire - think floral prints, and pastels!</p>
                 </div>
                 <div>
                   <h4 className="font-semibold text-wedding-sage mb-2">Weather</h4>
