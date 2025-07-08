@@ -39,12 +39,13 @@
 
     /* --wedding-coral: hsl(334, 100.00%, 82.70%); */
 
-    --wedding-coral: 334 100% 82.70%;
-    --wedding-peach: 25 95% 85%;
-    --wedding-lavender: 260 60% 80%;
-    --wedding-sage: 120 25% 55%;
-    --wedding-cream: 45 100% 97%;
-    --wedding-blue: 220 70% 75%;
+    --wedding-coral: 357 97% 86%;
+    --wedding-peach: 41 100% 86%;
+    /* --wedding-lavender: 260 60% 80%; */
+    /* --orange: 28 100% 80%; */
+    --wedding-sage: 107 24% 85%;
+    /* --wedding-cream: 45 100% 97%; */
+    --wedding-blue: 216 100% 90%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;

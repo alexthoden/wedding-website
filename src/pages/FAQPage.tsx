@@ -83,8 +83,8 @@ const FAQPage = () => {
                   Still Have Questions?
                 </h3>
                 <p className="text-gray-700 mb-4">
-                  We're here to help! If you have any other questions about our wedding day, 
-                  please don't hesitate to reach out to us directly.
+                  If you have any other questions about our wedding day, 
+                  please don't hesitate to reach out to Alex directly.
                 </p>
                 <p className="text-wedding-sage font-medium">
                   We can't wait to celebrate with you!

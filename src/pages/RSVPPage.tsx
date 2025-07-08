@@ -142,7 +142,19 @@ const RSVPPage = () => {
       return;
     }
 
-    if (Object.keys(formData.attendance).length === 0) {
+    // Get all group members
+    const groupGuests = guestList.filter(g => String(g.group_id) === String(currentGuest.group_id));
+    if (groupGuests.length === 0) {
+      toast({
+        title: "No guests found for your group.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Ensure attendance is filled for each group member
+    const missingAttendance = groupGuests.some(g => !formData.attendance[g.email]);
+    if (missingAttendance) {
       toast({
         title: "Please select the attendance status for each guest",
         variant: "destructive"
@@ -151,42 +163,51 @@ const RSVPPage = () => {
     }
 
     setIsSubmitting(true);
-    
     try {
-      const responseData = {
-        guest_email: formData.email.toLowerCase(),
-        guest_name: formData.name,
-        attendance: formData.attendance, // store as jsonb
-        dietary_restrictions: formData.dietaryRestrictions || null,
-        accommodation: formData.accommodation || null,
-        message: formData.message || null,
-        updated_at: new Date().toISOString(),
-        group_id: currentGuest?.group_id || null
-      };
-
-      let result;
-      if (existingResponse) {
-        // Update existing response
-        result = await supabase
+      // For each guest in the group, upsert their RSVP
+      const upsertResults = await Promise.all(groupGuests.map(async (guest) => {
+        // Check for existing response for this guest
+        const { data: existing, error: fetchError } = await supabase
           .from('rsvp_responses')
-          .update(responseData)
-          .eq('id', existingResponse.id);
-      } else {
-        // Insert new response
-        result = await supabase
-          .from('rsvp_responses')
-          .insert([responseData]);
-      }
+          .select('*')
+          .eq('guest_email', guest.email.toLowerCase())
+          .maybeSingle();
+        if (fetchError) throw fetchError;
 
-      if (result.error) {
-        throw result.error;
-      }
+        const responseData = {
+          guest_email: guest.email.toLowerCase(),
+          guest_name: guest.name,
+          attendance: formData.attendance[guest.email], 
+          dietary_restrictions: formData.dietaryRestrictions || null,
+          accommodation: formData.accommodation || null,
+          message: formData.message || null,
+          updated_at: new Date().toISOString(),
+          group_id: guest.group_id || null
+        };
+        console.log(responseData)
+
+        if (existing) {
+          // Update existing response
+          return await supabase
+            .from('rsvp_responses')
+            .update(responseData)
+            .eq('id', existing.id);
+        } else {
+          // Insert new response
+          return await supabase
+            .from('rsvp_responses')
+            .insert([responseData]);
+        }
+      }));
+
+      // Check for any errors
+      const anyError = upsertResults.some(r => r.error);
+      if (anyError) throw new Error('One or more responses failed to save.');
 
       toast({
-        title: existingResponse ? "RSVP Updated!" : "RSVP Submitted!",
+        title: "RSVP Submitted!",
         description: "Thank you for your response. We can't wait to celebrate with you!",
       });
-      
       // Reset form
       setFormData({
         name: '',
@@ -363,7 +384,7 @@ const RSVPPage = () => {
                       </div>
                     ))}
 
-                  {Object.keys(formData.attendance).length > 0 && formData.attendance[Object.keys(formData.attendance)[0]] === 'yes' && (
+                  {Object.values(formData.attendance).some(val => val === 'yes') && (
                     <>
                       <div>
                         <Label htmlFor="dietary" className="text-wedding-coral font-medium">
