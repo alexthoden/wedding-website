@@ -37,7 +37,9 @@
 
     --radius: 0.5rem;
 
-    --wedding-coral: 15 86% 65%;
+    /* --wedding-coral: hsl(334, 100.00%, 82.70%); */
+
+    --wedding-coral: 334 100% 82.70%;
     --wedding-peach: 25 95% 85%;
     --wedding-lavender: 260 60% 80%;
     --wedding-sage: 120 25% 55%;
