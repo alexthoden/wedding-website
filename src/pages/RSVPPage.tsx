@@ -71,31 +71,30 @@ const RSVPPage = () => {
     }
   };
 
-  const handleEmailVerification = async () => {
-    if (!formData.email) {
+  const handleNameVerification = async () => {
+    if (!formData.name) {
       toast({
-        title: "Please enter your email address",
+        title: "Please enter your full name",
         variant: "destructive"
       });
       return;
     }
 
-    const guest = findGuestByEmail(guestList, formData.email);
+    // Find guest by name (case-insensitive, trimmed)
+    const guest = guestList.find(g => g.name.trim().toLowerCase() === formData.name.trim().toLowerCase());
     if (!guest) {
       toast({
-        title: "Email not found",
-        description: "Your email address is not on our guest list. Please check the spelling or contact us.",
+        title: "Name not found",
+        description: "Your name is not on our guest list. Please check the spelling or contact us.",
         variant: "destructive"
       });
       return;
     }
 
     // Check for existing response
-    const existing = await checkExistingResponse(formData.email);
-    
+    const existing = await checkExistingResponse(guest.email);
     setCurrentGuest(guest);
     setEmailVerified(true);
-    
     if (existing) {
       setExistingResponse({
         ...existing,
@@ -104,22 +103,22 @@ const RSVPPage = () => {
       setFormData(prev => ({
         ...prev,
         name: existing.guest_name,
+        email: guest.email, // set email for later use
         attendance: typeof existing.attendance === 'string' ? JSON.parse(existing.attendance) : existing.attendance,
         dietaryRestrictions: existing.dietary_restrictions || '',
         accommodation: existing.accommodation || '',
         message: existing.message || ''
       }));
-      
       toast({
         title: "Existing RSVP Found",
         description: `Hi ${existing.guest_name}! We found your previous response. You can edit it below.`,
       });
     } else {
-      setFormData(prev => ({ 
-        ...prev, 
-        name: guest.name
+      setFormData(prev => ({
+        ...prev,
+        name: guest.name,
+        email: guest.email // set email for later use
       }));
-      
       toast({
         title: "Welcome!",
         description: `Hi ${guest.name}! Please complete your RSVP below.`,
@@ -153,7 +152,7 @@ const RSVPPage = () => {
     }
 
     // Ensure attendance is filled for each group member
-    const missingAttendance = groupGuests.some(g => !formData.attendance[g.email]);
+    const missingAttendance = groupGuests.some(g => !formData.attendance[g.name]);
     if (missingAttendance) {
       toast({
         title: "Please select the attendance status for each guest",
@@ -166,38 +165,52 @@ const RSVPPage = () => {
     try {
       // For each guest in the group, upsert their RSVP
       const upsertResults = await Promise.all(groupGuests.map(async (guest) => {
-        // Check for existing response for this guest
+        // Check for existing response for this guest using guest_name and group_id
         const { data: existing, error: fetchError } = await supabase
           .from('rsvp_responses')
           .select('*')
-          .eq('guest_email', guest.email.toLowerCase())
+          .eq('guest_name', guest.name)
+          .eq('group_id', guest.group_id)
           .maybeSingle();
         if (fetchError) throw fetchError;
 
         const responseData = {
-          guest_email: guest.email.toLowerCase(),
+          guest_email: guest.email ? guest.email.toLowerCase() : null,
           guest_name: guest.name,
-          attendance: formData.attendance[guest.email], 
+          attendance: formData.attendance[guest.name],
           dietary_restrictions: formData.dietaryRestrictions || null,
           accommodation: formData.accommodation || null,
           message: formData.message || null,
           updated_at: new Date().toISOString(),
           group_id: guest.group_id || null
         };
-        console.log(responseData)
+        // console.log("Submitting RSVP for:", responseData);
 
+        let result;
         if (existing) {
-          // Update existing response
-          return await supabase
+          result = await supabase
             .from('rsvp_responses')
             .update(responseData)
-            .eq('id', existing.id);
+            .eq('guest_name', guest.name)
+            .eq('group_id', guest.group_id);
+          console.log("Update result:", result);
         } else {
-          // Insert new response
-          return await supabase
+          result = await supabase
             .from('rsvp_responses')
             .insert([responseData]);
+          // console.log("Insert result:", result);
         }
+
+        if (result.error) {
+          console.error("Supabase error:", result.error);
+          toast({
+            title: "Submission Error",
+            description: result.error.message || "Unknown error",
+            variant: "destructive"
+          });
+        }
+
+        return result;
       }));
 
       // Check for any errors
@@ -264,31 +277,29 @@ const RSVPPage = () => {
                     <div>
                       <p className="text-sm font-medium text-wedding-blue">Guest List Verification</p>
                       <p className="text-sm text-gray-600 mt-1">
-                        Please enter the email address from your invitation to access the RSVP form.
+                        Please enter your full name as it appears on your invitation to access the RSVP form.
                       </p>
                     </div>
                   </div>
-                  
                   <div>
-                    <Label htmlFor="email-verify" className="text-wedding-coral font-medium">
-                      Email Address from Invitation
+                    <Label htmlFor="name-verify" className="text-wedding-coral font-medium">
+                      Full Name from Invitation
                     </Label>
                     <Input
-                      id="email-verify"
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => handleInputChange('email', e.target.value)}
-                      placeholder="your.email@example.com"
+                      id="name-verify"
+                      type="text"
+                      value={formData.name}
+                      onChange={(e) => handleInputChange('name', e.target.value)}
+                      placeholder="Your Full Name"
                       className="mt-1 border-wedding-peach focus:border-wedding-coral"
-                      onKeyPress={(e) => e.key === 'Enter' && handleEmailVerification()}
+                      onKeyPress={(e) => e.key === 'Enter' && handleNameVerification()}
                     />
                   </div>
-                  
                   <Button
-                    onClick={handleEmailVerification}
+                    onClick={handleNameVerification}
                     className="w-full bg-wedding-coral hover:bg-wedding-coral/90 text-white"
                   >
-                    Verify Email & Continue
+                    Verify Name & Continue
                   </Button>
                 </div>
               ) : existingResponse && !isEditing ? (
@@ -360,25 +371,25 @@ const RSVPPage = () => {
                     .filter(g => String(g.group_id) === String(currentGuest.group_id))
                     
                     .map((guest) => (
-                      <div key={guest.email} className="mb-4">
+                      <div key={guest.name} className="mb-4">
                         <Label className="text-wedding-coral font-medium mb-2 block">
                           Will {guest.name} be attending?
                         </Label>
                         <RadioGroup
-                          value={formData.attendance[guest.email] || ''}
+                          value={formData.attendance[guest.name] || ''}
                           onValueChange={(value) => setFormData(prev => ({
                             ...prev,
-                            attendance: { ...prev.attendance, [guest.email]: value }
+                            attendance: { ...prev.attendance, [guest.name]: value }
                           }))}
                           className="flex space-x-6"
                         >
                           <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="yes" id={`yes-${guest.email}`} className="border-wedding-coral" />
-                            <Label htmlFor={`yes-${guest.email}`}>Yes</Label>
+                            <RadioGroupItem value="yes" id={`yes-${guest.name}`} className="border-wedding-coral" />
+                            <Label htmlFor={`yes-${guest.name}`}>Yes</Label>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="no" id={`no-${guest.email}`} className="border-wedding-coral" />
-                            <Label htmlFor={`no-${guest.email}`}>No</Label>
+                            <RadioGroupItem value="no" id={`no-${guest.name}`} className="border-wedding-coral" />
+                            <Label htmlFor={`no-${guest.name}`}>No</Label>
                           </div>
                         </RadioGroup>
                       </div>
