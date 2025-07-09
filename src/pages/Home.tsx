@@ -37,12 +37,15 @@ const DrinkIcon = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 const Home = () => {
+  const venueBgOpacity = 0.5;
+  const flowersBgOpacity = 0.5;
+
   return (
     <>
       <section className="min-h-screen flex items-center justify-center relative">
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
-          style={{ backgroundImage: 'url(/images/venue_watercolor.png)' }}
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: 'url(/images/venue_watercolor.png)', opacity: venueBgOpacity }}
         />
         <div className="relative z-10 container mx-auto px-4 text-center">
           <div className="animate-fade-in">
@@ -64,8 +67,8 @@ const Home = () => {
 
       <section className="py-20 bg-gradient-to-br from-wedding-cream to-wedding-peach relative">
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20 pointer-events-none"
-          style={{ backgroundImage: 'url(/images/test_flowers.png)' }}
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none"
+          style={{ backgroundImage: 'url(/images/test_flowers.png)', opacity: flowersBgOpacity }}
         />
         <div className="relative z-10 container mx-auto px-4">
           <div className="max-w-4xl mx-auto">

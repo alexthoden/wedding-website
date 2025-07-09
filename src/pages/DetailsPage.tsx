@@ -1,11 +1,27 @@
-
 import { Calendar, MapPin, Clock, Camera } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const DetailsPage = () => {
   return (
-    <section className="py-20 bg-gradient-to-br from-wedding-cream to-wedding-peach min-h-screen">
-      <div className="container mx-auto px-4">
+    <section className="py-20 min-h-screen relative">
+      {/* Stationary flower background at the bottom, full width, dimmed */}
+      <img
+        src="/images/test_flowers.png"
+        alt="flowers background"
+        style={{
+          position: 'fixed',
+          left: 0,
+          bottom: 0,
+          width: '100vw',
+          minWidth: '100%',
+          zIndex: 0,
+          pointerEvents: 'none',
+          userSelect: 'none',
+          opacity: 0.7,
+        }}
+        aria-hidden="true"
+      />
+      <div className="container mx-auto px-4" style={{ position: 'relative', zIndex: 1 }}>
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-wedding-coral mb-4">

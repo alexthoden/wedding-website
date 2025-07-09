@@ -251,8 +251,25 @@ const RSVPPage = () => {
   };
 
   return (
-    <section className="py-20 bg-white min-h-screen" style={{ backgroundImage: "url('/images/test_flowers.png')", backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}>
-      <div className="container mx-auto px-4">
+    <section className="py-20 min-h-screen relative">
+      {/* Stationary flower background at the bottom, full width */}
+      <img
+        src="/images/test_flowers.png"
+        alt="flowers background"
+        style={{
+          position: 'fixed',
+          left: 0,
+          bottom: 0,
+          width: '100vw',
+          minWidth: '100%',
+          zIndex: 0,
+          pointerEvents: 'none',
+          opacity: 0.7,
+          userSelect: 'none',
+        }}
+        aria-hidden="true"
+      />
+      <div className="container mx-auto px-4" style={{ position: 'relative', zIndex: 1 }}>
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-wedding-coral mb-4">
