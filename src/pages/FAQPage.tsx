@@ -14,19 +14,19 @@ const FAQPage = () => {
     },
     {
       question: "What time should I arrive?",
-      answer: "Please arrive by 3:45 PM for the 4:00 PM ceremony. This will give you time to find your seat and enjoy the pre-ceremony atmosphere."
+      answer: "Please arrive by 4:45 PM for the 5:00 PM ceremony. This will give you time to find your seat and enjoy the pre-ceremony atmosphere."
     },
     {
       question: "Is the wedding indoors or outdoors?",
-      answer: "Both the ceremony and reception will be held outdoors in the beautiful gardens. We'll have umbrellas ready just in case of rain!"
+      answer: "The ceremony will be outdoors unless it rains, in which case it will be moved indoors. The reception and cocktail hour will both be held indoors so no need to have an umbrella ready!"
     },
     {
       question: "Can I bring a plus-one?",
-      answer: "We have planned this celebration based on our guest list. Please check your invitation for the number of guests invited. If you have questions, feel free to reach out to us directly."
+      answer: "We have planned this celebration based on our guest list. Please check your invitation for the number of guests invited. If you have questions, feel free to reach out to Alex directly."
     },
     {
       question: "Will there be food and drinks?",
-      answer: "Yes! We'll have a full dinner service followed by dancing and celebration. We'll accommodate dietary restrictions - please let us know when you RSVP."
+      answer: "Yes! We'll have a full dinner service followed by dancing and celebration. We will plan to accommodate dietary restrictions - please let us know when you RSVP."
     },
     {
       question: "What if I have dietary restrictions?",
@@ -34,7 +34,7 @@ const FAQPage = () => {
     },
     {
       question: "Is there a gift registry?",
-      answer: "Your presence is the greatest gift! If you'd like to give something, we have a registry available in the upper right."
+      answer: "Your presence is the greatest gift! If you'd like to give something, we have a registry available in the menu at the top of the page."
     },
     {
       question: "Can I take photos during the ceremony?",
@@ -42,7 +42,7 @@ const FAQPage = () => {
     },
     {
       question: "What time will the reception end?",
-      answer: "The reception will run from 6:00 PM to 11:00 PM, with plenty of time for dinner, dancing, and celebration!"
+      answer: "The reception will run from 6:30 PM to 11:00 PM, with plenty of time for dinner, dancing, and celebration!"
     }
   ];
 
