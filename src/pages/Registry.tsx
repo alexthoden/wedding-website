@@ -23,7 +23,7 @@ const registries = [
 
 const Registry = () => {
   return (
-    <section className="py-20 bg-gradient-to-br from-wedding-cream to-wedding-peach min-h-screen">
+    <section className="py-20 min-h-screen" style={{ backgroundImage: "url('/images/test_flowers.png')", backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}>
       <div className="container mx-auto px-4 max-w-3xl">
         <div className="text-center mb-12">
           <h2 className="font-serif text-4xl md:text-5xl font-bold text-wedding-coral mb-4">Gift Registry</h2>

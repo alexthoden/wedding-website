@@ -49,7 +49,7 @@ const flatPhotos = groupedPhotos.flatMap(group => group.photos);
 const PhotosPage = () => {
   const [modalPhoto, setModalPhoto] = useState(null);
   return (
-    <section className="py-20 bg-gradient-to-br from-wedding-cream to-wedding-peach min-h-screen">
+    <section className="py-20 min-h-screen" style={{ backgroundImage: "url('/images/test_flowers.png')", backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}>
       <div className="container mx-auto px-4 flex flex-row">
         {/* Timeline (syncs with photos) */}
         {/* <aside className="hidden md:block pr-8 w-1/4" style={{ marginTop: '300px' }}>

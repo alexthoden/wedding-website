@@ -251,7 +251,7 @@ const RSVPPage = () => {
   };
 
   return (
-    <section className="py-20 bg-white min-h-screen">
+    <section className="py-20 bg-white min-h-screen" style={{ backgroundImage: "url('/images/test_flowers.png')", backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}>
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
@@ -362,14 +362,18 @@ const RSVPPage = () => {
                     <p className="text-sm font-medium text-wedding-sage">
                       {existingResponse ? `Editing response for ${currentGuest?.name}!` : `Welcome, ${currentGuest?.name}!`}
                     </p>
-                    <p className="text-sm text-gray-600">
+                    {/* <p className="text-sm text-gray-600">
                       You are invited with up to {currentGuest?.invited_guests} guest{(currentGuest?.invited_guests || 1) > 1 ? 's' : ''} total.
-                    </p>
+                    </p> */}
                   </div>
 
                   {currentGuest && guestList
                     .filter(g => String(g.group_id) === String(currentGuest.group_id))
-                    
+                    .sort((a, b) => {
+                      if (a.name === currentGuest.name) return -1;
+                      if (b.name === currentGuest.name) return 1;
+                      return a.name.localeCompare(b.name);
+                    })
                     .map((guest) => (
                       <div key={guest.name} className="mb-4">
                         <Label className="text-wedding-coral font-medium mb-2 block">
