@@ -102,7 +102,7 @@ const Home = () => {
             
             <div className="text-center mb-12">
               <h2 className="font-serif text-4xl md:text-5xl font-bold text-wedding-coral mb-4">
-                Wedding Details
+                Day-Of Details
               </h2>
               <p className="text-gray-600 text-lg">Everything you need to know</p>
             </div>

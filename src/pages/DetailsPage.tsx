@@ -52,7 +52,7 @@ const DetailsPage = () => {
                   <MapPin className="w-5 h-5 text-wedding-coral" />
                   <p className="text-lg">Bluemont</p>
                 </div>
-                {/* <p className="text-gray-600">12729 Ridgeside Rd, Bluemont, VA 20135</p> */}
+                <p className="text-gray-600">Join us for dinner, drinks, and yard games. Come as you are, we are excited to see you!</p>
               </CardContent>
             </Card>
 
@@ -101,7 +101,7 @@ const DetailsPage = () => {
             </Card>
 
             {/* Additional Information */}
-            <Card className="bg-white/90 backdrop-blur-sm border-wedding-peach shadow-lg">
+            {/* <Card className="bg-white/90 backdrop-blur-sm border-wedding-peach shadow-lg">
               <CardHeader className="text-center">
                 <CardTitle className="font-serif text-2xl text-wedding-coral">Additional Information</CardTitle>
               </CardHeader>
@@ -119,7 +119,7 @@ const DetailsPage = () => {
                   <p className="text-gray-700">Free parking available on-site. Bus service will be provided from hotel block.</p>
                 </div>
               </CardContent>
-            </Card>
+            </Card> */}
           </div>
         </div>
       </div>
