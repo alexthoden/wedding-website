@@ -37,8 +37,8 @@ const DrinkIcon = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 const Home = () => {
-  const venueBgOpacity = 0.5;
-  const flowersBgOpacity = 0.5;
+  const venueBgOpacity = 0.2;
+  const flowersBgOpacity = 0.2;
 
   return (
     <>
@@ -66,9 +66,36 @@ const Home = () => {
       </section>
 
       <section className="py-20 bg-gradient-to-br from-wedding-cream to-wedding-peach relative">
-        <div 
+        {/* <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none"
-          style={{ backgroundImage: 'url(/images/test_flowers.png)', opacity: flowersBgOpacity }}
+          style={{ 
+            backgroundImage: 'url(/images/test_flowers.png)', 
+            opacity: flowersBgOpacity,
+            position: 'absolute',
+            width: '100vw',
+            minWidth: '100%',
+            left: 0,
+            bottom: 0,
+            zIndex: 0,
+            pointerEvents: 'none',
+            userSelect: 'none',
+          }}
+        /> */}
+        <img
+          src="/images/test_flowers.png"
+          alt="flowers background"
+          style={{
+            position: 'absolute',
+            left: 0,
+            bottom: 0,
+            width: '100vw',
+            minWidth: '100%',
+            zIndex: 0,
+            pointerEvents: 'none',
+            userSelect: 'none',
+            opacity: 0.2,
+          }}
+          aria-hidden="true"
         />
         <div className="relative z-10 container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
@@ -79,7 +106,7 @@ const Home = () => {
               </h2>
               <p className="text-gray-600 text-lg">Everything you need to know</p>
             </div>
-
+{/* 
             <div className="flex justify-center mb-8">
               <Card className="bg-white/90 backdrop-blur-sm border-wedding-peach shadow-lg max-w-md w-full">
                 <CardHeader className="text-center">
@@ -98,10 +125,9 @@ const Home = () => {
                     <MapPin className="w-5 h-5 text-wedding-coral" />
                     <p className="text-lg">Bluemont</p>
                   </div>
-                  {/* <p className="text-gray-600">12729 Ridgeside Rd, Bluemont, VA 20135</p> */}
                 </CardContent>
               </Card>
-            </div>
+            </div> */}
 
             <div className="grid md:grid-cols-2 gap-8">
               <Card className="bg-white/90 backdrop-blur-sm border-wedding-peach shadow-lg max-w-md w-full mx-auto">
@@ -171,6 +197,12 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      <footer className="w-full py-1 bg-transparent">
+        <div className="container mx-auto text-center">
+          <span className="text-wedding-blue text-sm font-semibold">Handmade with care by yours truly &lt;3</span>
+        </div>
+      </footer>
     </>
   );
 };

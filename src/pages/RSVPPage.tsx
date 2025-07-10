@@ -264,7 +264,7 @@ const RSVPPage = () => {
           minWidth: '100%',
           zIndex: 0,
           pointerEvents: 'none',
-          opacity: 0.7,
+          opacity: 0.2,
           userSelect: 'none',
         }}
         aria-hidden="true"

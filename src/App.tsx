@@ -12,6 +12,7 @@ import FAQPage from "./pages/FAQPage";
 import RSVPPage from "./pages/RSVPPage";
 import NotFound from "./pages/NotFound";
 import Registry from "./pages/Registry";
+import DetailsPage from "./pages/DetailsPage";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
               <Route path="/faq" element={<FAQPage />} />
               <Route path="/rsvp" element={<RSVPPage />} />
               <Route path="/registry" element={<Registry/>} />
+              <Route path="/details" element={<DetailsPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

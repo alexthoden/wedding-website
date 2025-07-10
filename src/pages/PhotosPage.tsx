@@ -10,7 +10,7 @@ const photoGallery = [
   { id: 6, src: '/images/wisconsin.JPG', alt: 'Wisconsin', caption: 'Wisconsin', date: 'Jun 2021', month: 6, year: 2021 },
   { id: 7, src: '/images/Beach_Jun2022.JPG', alt: 'Beach June 2022', caption: 'Corolla, NC', date: 'Jun 2022', month: 6, year: 2022 },
   { id: 8, src: '/images/Rome_May2022.JPG', alt: 'Rome May 2022', caption: 'Visiting the Gladiators', date: 'May 2022', month: 5, year: 2022 },
-  { id: 9, src: '/images/Engaged_July2024.HEIC', alt: 'Engaged July 2024', caption: 'Engaged!', date: 'Jul 2024', month: 7, year: 2024 },
+  { id: 9, src: '/images/Engaged_July2024.png', alt: 'Engaged July 2024', caption: 'Engaged!', date: 'Jul 2024', month: 7, year: 2024 },
   { id: 10, src: '/images/Ivy_blacksburg_Nov2024.JPG', alt: 'Ivy Blacksburg Nov 2024', caption: "Ivy's first football game!", date: 'Nov 2024', month: 11, year: 2024 },
 ];
 
@@ -62,7 +62,7 @@ const PhotosPage = () => {
           minWidth: '100%',
           zIndex: 0,
           pointerEvents: 'none',
-          opacity: 0.7,
+          opacity: 0.2,
           userSelect: 'none',
         }}
         aria-hidden="true"

@@ -60,7 +60,7 @@ const FAQPage = () => {
           zIndex: 0,
           pointerEvents: 'none',
           userSelect: 'none',
-          opacity: 0.7,
+          opacity: 0.2,
         }}
         aria-hidden="true"
       />
