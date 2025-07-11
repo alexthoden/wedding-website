@@ -186,7 +186,7 @@ const Home = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-wedding-sage mb-2">Weather</h4>
-                  <p className="text-gray-700">The ceremony will be outdoors. We'll have umbrellas ready just in case!</p>
+                  <p className="text-gray-700">Weather permitting, the ceremony and cocktail hour will be outside on the patio.</p>
                 </div>
                 <div>
                   <h4 className="font-semibold text-wedding-sage mb-2">Parking</h4>
@@ -200,7 +200,7 @@ const Home = () => {
 
       <footer className="w-full py-1 bg-transparent">
         <div className="container mx-auto text-center">
-          <span className="text-wedding-blue text-sm font-semibold">Handmade with care by yours truly &lt;3</span>
+          <span className="text-wedding-blue text-sm font-semibold">Created on Alex's Laptop &lt;3</span>
         </div>
       </footer>
     </>

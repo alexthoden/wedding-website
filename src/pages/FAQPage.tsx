@@ -5,7 +5,7 @@ const FAQPage = () => {
   const faqs = [
     {
       question: "What should I wear?",
-      answer: "We suggest garden party attire - think floral prints, pastels, and comfortable shoes for walking on grass. The ceremony will be outdoors, so dress accordingly for the weather."
+      answer: "Attire is formal but we invite our guests to embrace our pastel floral theme!"
     },
     {
       question: "Where should I park?",
@@ -17,7 +17,7 @@ const FAQPage = () => {
     },
     {
       question: "Is the wedding indoors or outdoors?",
-      answer: "The ceremony will be outdoors unless it rains, in which case it will be moved indoors. The reception and cocktail hour will both be held indoors so no need to have an umbrella ready!"
+      answer: "The ceremony will be outdoors unless it rains, in which case it will be moved indoors. The reception will be held indoors so no need to bring an umbrella!"
     },
     {
       question: "Can I bring a plus-one?",
