@@ -13,6 +13,7 @@ const Header = () => {
     { label: 'Wedding Details', path: '/details' },
     // { label: 'Our Story', path: '/story' },
     { label: 'Photos', path: '/photos' },
+    { label: 'Things To Do', path: '/things-to-do' },
     { label: 'Registry', path: '/registry' },
     { label: 'FAQ', path: '/faq' },
     { label: 'RSVP', path: '/rsvp' }

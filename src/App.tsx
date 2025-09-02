@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import StoryPage from "./pages/StoryPage";
 import PhotosPage from "./pages/PhotosPage";
 import FAQPage from "./pages/FAQPage";
+import ThingsToDoPage from "./pages/ThingsToDoPage";
 import RSVPPage from "./pages/RSVPPage";
 import NotFound from "./pages/NotFound";
 import Registry from "./pages/Registry";
@@ -30,6 +31,7 @@ const App = () => (
               <Route path="/story" element={<StoryPage />} />
               <Route path="/photos" element={<PhotosPage />} />
               <Route path="/faq" element={<FAQPage />} />
+              <Route path="/things-to-do" element={<ThingsToDoPage />} />
               <Route path="/rsvp" element={<RSVPPage />} />
               <Route path="/registry" element={<Registry/>} />
               <Route path="/details" element={<DetailsPage />} />
