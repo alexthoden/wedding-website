@@ -12,6 +12,11 @@ const ThingsToDoPage = () => {
     ],
     Bluemont: [
       {
+        title: "More Better Beer",
+        description: "A Beer Garden with European flaIr & American interests",
+        link: "https://www.morebetterbeer.com/"
+      },
+      {
         title: "Bluemont Vineyard",
         description: "Enjoy wine tasting and beautiful views at Bluemont Vineyard, just minutes from the venue!",
         link: "https://www.bluemontvineyard.com/"
@@ -46,7 +51,7 @@ const ThingsToDoPage = () => {
       {
         title: "Antique Shopping",
         description: "Discover unique finds at antique shops throughout Loudoun County.",
-        link: null
+        link: "https://www.luckettstore.com"
       }
     ]
   };

@@ -142,7 +142,7 @@ const Home = () => {
                   </div>
                   <div className="flex items-center justify-center space-x-2">
                     <Clock className="w-5 h-5 text-wedding-coral" />
-                    <p className="text-lg">5:00 PM</p>
+                    <p className="text-lg">4:45 PM</p>
                   </div>
                   <div className="flex items-center justify-center space-x-2">
                     <MapPin className="w-5 h-5 text-wedding-coral" />
@@ -179,10 +179,10 @@ const Home = () => {
               <CardHeader className="text-center">
                 <CardTitle className="font-serif text-2xl text-wedding-coral">Additional Information</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="text-center space-y-4">
                 <div>
                   <h4 className="font-semibold text-wedding-sage mb-2">Dress Code</h4>
-                  <p className="text-gray-700">Garden party formal - think floral prints, and pastels!</p>
+                  <p className="text-gray-700">Formal</p>
                 </div>
                 <div>
                   <h4 className="font-semibold text-wedding-sage mb-2">Weather</h4>
