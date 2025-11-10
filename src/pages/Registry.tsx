@@ -2,23 +2,11 @@ import React from 'react';
 
 const registries = [
   {
-    name: 'Amazon',
-    url: 'https://www.amazon.com/wedding',
-    logo: '/images/amazon-logo.png',
-    description: 'Shop our Amazon registry for a wide selection of gifts.'
+    name: 'MyRegistry.com',
+    url: 'https://www.myregistry.com/wedding-registry/lauen-woodward-and-alex-thoden-rockville-md/5114248',
+    logo: '/images/myregistry.png',
+    description: 'Shop our centralized registry for a wide selection of gifts.'
   },
-  {
-    name: 'Target',
-    url: 'https://www.target.com/gift-registry',
-    logo: '/images/target-logo.png',
-    description: 'Find our Target registry for home and essentials.'
-  },
-  {
-    name: 'Honeyfund',
-    url: 'https://www.honeyfund.com',
-    logo: '/images/honeyfund-logo.png',
-    description: 'Contribute to our honeymoon fund and experiences.'
-  }
 ];
 
 const Registry = () => {
