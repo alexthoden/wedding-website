@@ -59,7 +59,7 @@ const Home = () => {
             <div className="bg-white/90 backdrop-blur-sm rounded-lg p-8 max-w-md mx-auto shadow-lg border border-wedding-peach">
               <p className="text-lg font-medium text-wedding-sage mb-2">Save the Date!</p>
               <p className="text-3xl font-serif font-bold text-wedding-coral mb-2">August 28, 2026</p>
-              <p className="text-gray-600">Bluemont, VA</p>
+              <p className="text-gray-600">19729 Ridgeside Rd, Bluemont, VA 20135</p>
             </div>
           </div>
         </div>
@@ -146,7 +146,7 @@ const Home = () => {
                   </div>
                   <div className="flex items-center justify-center space-x-2">
                     <MapPin className="w-5 h-5 text-wedding-coral" />
-                    <p className="text-lg">Bluemont</p>
+                    <p className="text-lg">The View at Bluemont</p>
                   </div>
                   {/* <p className="text-gray-600">12729 Ridgeside Rd, Bluemont, VA 20135</p> */}
                 </CardContent>
@@ -168,7 +168,7 @@ const Home = () => {
                   </div>
                   <div className="flex items-center justify-center space-x-2">
                     <MapPin className="w-5 h-5 text-wedding-coral" />
-                    <p className="text-lg">Banquet Hall</p>
+                    <p className="text-lg">The View at Bluemont Banquet Hall</p>
                   </div>
                   {/* <p className="text-gray-600">Same location</p> */}
                 </CardContent>

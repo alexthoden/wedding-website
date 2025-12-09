@@ -93,7 +93,7 @@ const DetailsPage = () => {
             </h2>
             <p className="text-gray-600 text-lg">
               Everything you need to know about our wedding weekend.
-              Don't yell at me, this is just a draft :(
+              {/* Don't yell at me, this is just a draft :( */}
             </p>
           </div>
 
@@ -115,7 +115,7 @@ const DetailsPage = () => {
                 </div>
                 <div className="flex items-center justify-center space-x-2">
                   <MapPin className="w-5 h-5 text-wedding-coral" />
-                  <p className="text-lg">Backyard</p>
+                  <p className="text-lg">The View at Bluemont Patio</p>
                 </div>
                 <p className="text-gray-600">Join us for dinner, drinks, and yard games. Come as you are, we are excited to see you!</p>
               </CardContent>
@@ -138,7 +138,7 @@ const DetailsPage = () => {
                 </div>
                 <div className="flex items-center justify-center space-x-2">
                   <MapPin className="w-5 h-5 text-wedding-coral" />
-                  <p className="text-lg">Patio</p>
+                  <p className="text-lg">The View at Bluemont Patio</p>
                 </div>
                 {/* <p className="text-gray-600">12729 Ridgeside Rd, Bluemont, VA 20135</p> */}
               </CardContent>
@@ -161,7 +161,7 @@ const DetailsPage = () => {
                 </div>
                 <div className="flex items-center justify-center space-x-2">
                   <MapPin className="w-5 h-5 text-wedding-coral" />
-                  <p className="text-lg">Patio</p>
+                  <p className="text-lg">The View at Bluemont Patio</p>
                 </div>
                 {/* <p className="text-gray-600">Same location</p> */}
               </CardContent>
@@ -182,7 +182,7 @@ const DetailsPage = () => {
                 </div>
                 <div className="flex items-center justify-center space-x-2">
                   <MapPin className="w-5 h-5 text-wedding-coral" />
-                  <p className="text-lg">Banquet Hall</p>
+                  <p className="text-lg">The View at Bluemont Banquet Hall</p>
                 </div>
                 {/* <p className="text-gray-600">Same location</p> */}
               </CardContent>
