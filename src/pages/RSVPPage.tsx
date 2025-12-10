@@ -30,6 +30,37 @@ interface ExistingResponse {
   group_id: string;
 }
 
+
+async function submitRsvpToEdgeFunction(payload: any) {
+  console.log("📤 Sending payload to Edge Function:", payload);
+
+  const url = "https://tireiqhsgftbsgwnauob.supabase.co/functions/v1/resend-email";
+  const anon_key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRpcmVpcWhzZ2Z0YnNnd25hdW9iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzMDIzNTIsImV4cCI6MjA4MDg3ODM1Mn0.2_HmRpafYrpNmuAg8CSwddi2XQTrRsw1a3TrZx-7M8o"
+  // const url = import.meta.env.VITE_SUPABSE_URL;
+  // const anon_key = import.meta.env.SUPABSE_ANON_KEY;
+  console.log("Calling URL:", url);
+
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+      ,"Authorization": `Bearer ${anon_key}`
+    },
+    body: JSON.stringify(payload),
+  });
+
+  console.log("📥 Response status:", res.status);
+
+  const data = await res.json().catch(() => null);
+  console.log("📥 Response body:", data);
+
+  if (!res.ok) {
+    throw new Error(data?.error || "Failed to submit RSVP");
+  }
+
+  return data;
+}
+
 const RSVPPage = () => {
   const { toast } = useToast();
   const [guestList, setGuestList] = useState<Guest[]>([]);
@@ -171,47 +202,59 @@ const RSVPPage = () => {
           .select('*')
           .eq('guest_name', guest.name)
           .eq('group_id', guest.group_id)
-          .maybeSingle();
+          .select('*')
+          .eq('group_id', guest.group_id);
         if (fetchError) throw fetchError;
 
+        const groupGuests = guestList
+          .filter(g => String(g.group_id) === String(currentGuest.group_id))
+          .map(g => g.name)
+          .sort();
+
+        const groupLeader = groupGuests[0];
+
         const responseData = {
-          guest_email: guest.email ? guest.email.toLowerCase() : null,
+          guest_email: formData.email?.toLowerCase() || null,
           guest_name: guest.name,
           attendance: formData.attendance[guest.name],
           dietary_restrictions: formData.dietaryRestrictions || null,
           accommodation: formData.accommodation || null,
           message: formData.message || null,
           updated_at: new Date().toISOString(),
-          group_id: guest.group_id || null
+          group_id: guest.group_id || null,
+          group_leader: groupLeader || null,
         };
         // console.log("Submitting RSVP for:", responseData);
 
         let result;
-        if (existing) {
-          result = await supabase
-            .from('rsvp_responses')
-            .update(responseData)
-            .eq('guest_name', guest.name)
-            .eq('group_id', guest.group_id);
-          console.log("Update result:", result);
-        } else {
-          result = await supabase
-            .from('rsvp_responses')
-            .insert([responseData]);
-          // console.log("Insert result:", result);
-        }
 
-        if (result.error) {
-          console.error("Supabase error:", result.error);
-          toast({
-            title: "Submission Error",
-            description: result.error.message || "Unknown error",
-            variant: "destructive"
-          });
+        if (existing) {
+          // ✅ Update existing RSVP directly in Supabase
+          result = await submitRsvpToEdgeFunction(responseData);
+
+          if (result.error) throw result.error;
+
+        } else {
+          // ✅ New RSVP → call Edge Function (save + email)
+          result = await submitRsvpToEdgeFunction(responseData);
         }
 
         return result;
-      }));
+      })
+    );
+
+
+      //   if (result.error) {
+      //     console.error("Supabase error:", result.error);
+      //     toast({
+      //       title: "Submission Error",
+      //       description: result.error.message || "Unknown error",
+      //       variant: "destructive"
+      //     });
+      //   }
+
+      //   return result;
+      // }));
 
       // Check for any errors
       const anyError = upsertResults.some(r => r.error);
@@ -336,6 +379,10 @@ const RSVPPage = () => {
                       <p className="text-gray-600">{existingResponse.guest_name}</p>
                     </div>
                     <div>
+                      <p className="font-medium text-gray-700">Email:</p>
+                      <p className="text-gray-600">{existingResponse.guest_email}</p>
+                    </div>
+                    <div>
                       <p className="font-medium text-gray-700">Attendance:</p>
                       <p className="text-gray-600 capitalize">
                         {existingResponse.attendance === 'yes' ? 'Yes, I\'ll be there!' : 'Sorry, can\'t make it'}
@@ -413,11 +460,31 @@ const RSVPPage = () => {
                             <Label htmlFor={`no-${guest.name}`}>No</Label>
                           </div>
                         </RadioGroup>
+
+                        
                       </div>
                     ))}
 
+                    
+
                   {Object.values(formData.attendance).some(val => val === 'yes') && (
                     <>
+
+                      <div className="mb-6">
+                        <Label
+                          htmlFor="email"
+                          className="text-wedding-coral font-medium mb-1 block">
+                          Your Email
+                        </Label>
+                        <Input
+                          id="email"
+                          value={formData.email}
+                          onChange={(e) => handleInputChange('email', e.target.value)}
+                          placeholder="name@example.com"
+                          className="mt-1 border-wedding-peach focus:border-wedding-coral"
+                        />
+                      </div>
+
                       <div>
                         <Label htmlFor="dietary" className="text-wedding-coral font-medium">
                           Dietary Restrictions

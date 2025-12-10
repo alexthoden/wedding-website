@@ -12,6 +12,9 @@ const photoGallery = [
   { id: 8, src: '/images/Rome_May2022.JPG', alt: 'Rome May 2022', caption: 'Visiting the Gladiators', date: 'May 2022', month: 5, year: 2022 },
   { id: 9, src: '/images/Engaged_July2024.png', alt: 'Engaged July 2024', caption: 'Engaged!', date: 'Jul 2024', month: 7, year: 2024 },
   { id: 10, src: '/images/Ivy_blacksburg_Nov2024.JPG', alt: 'Ivy Blacksburg Nov 2024', caption: "Ivy's first football game!", date: 'Nov 2024', month: 11, year: 2024 },
+  { id: 11, src: '/images/engagementPic1.jpg', alt: "Engagement Photo 1", caption: "We finally got engagement pics", date: 'August 2025', month: 8, year: 2025 },
+  { id: 12, src: '/images/engagementPic2.jpg', alt: "Engagement Photo 2", caption: "Love in the air", date: 'August 2025', month: 8, year: 2025 },
+  { id: 13, src: '/images/engagementPic3.jpg', alt: "Engagement Photo 3", caption: "Sunset vibes", date: 'August 2025', month: 8, year: 2025 },
 ];
 
 // Helper to group by 3-month periods
