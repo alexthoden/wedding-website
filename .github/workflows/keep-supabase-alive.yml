@@ -18,17 +18,13 @@ jobs:
           -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
           -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}"
 
-      - name: DEBUG - Inspect API Schema
+      - name: Verify Correct Database
         run: |
-          echo "Fetching the API schema to inspect its content..."
+          echo "Verifying that the database schema contains the 'rsvp_responses' table..."
           
-          # This command will now print the full JSON schema from the API to the log.
-          # We remove the pipe to grep and the '-s' flag to make the output visible.
-          curl "https://tireiqhsgftbsgwnauob.supabase.co/rest/v1/" \
-            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
-            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}"
-
-
+          curl -s "https://tireiqhsgftbsgwnauob.supabase.co/rest/v1/" \
+            -H "apikey: ${{ secrets.SUPABASE_SERVICE_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_KEY }}" \
+            | grep -q '"path": "/rsvp_responses"'
 
           echo "✅ Verification successful. The 'rsvp_responses' table was found in the API schema."
-
