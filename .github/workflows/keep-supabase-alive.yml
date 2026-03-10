@@ -18,16 +18,16 @@ jobs:
           -H "apikey: ${{ secrets.SUPABASE_SERVICE_KEY }}" \
           -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_KEY }}"
 
-      - name: DEBUG - Inspect API Schema
-        run: |
-          echo "Fetching the API schema with the service key..."
+      # - name: DEBUG - Inspect API Schema
+      #   run: |
+      #     echo "Fetching the API schema with the service key..."
           
-          # This will print the full JSON schema to the log.
-          # If the key is wrong, it will print an error.
-          # If the key is right, it will print the schema, and we can check the table name.
-          curl "https://tireiqhsgftbsgwnauob.supabase.co/rest/v1/" \
-            -H "apikey: ${{ secrets.SUPABASE_SERVICE_KEY }}" \
-            -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_KEY }}"
+      #     # This will print the full JSON schema to the log.
+      #     # If the key is wrong, it will print an error.
+      #     # If the key is right, it will print the schema, and we can check the table name.
+      #     curl "https://tireiqhsgftbsgwnauob.supabase.co/rest/v1/" \
+      #       -H "apikey: ${{ secrets.SUPABASE_SERVICE_KEY }}" \
+      #       -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_KEY }}"
 
 
       - name: Verify Correct Database
@@ -37,6 +37,6 @@ jobs:
           curl -s "https://tireiqhsgftbsgwnauob.supabase.co/rest/v1/" \
             -H "apikey: ${{ secrets.SUPABASE_SERVICE_KEY }}" \
             -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_KEY }}" \
-            | grep -q '"path": "/rsvp_responses"'
+            | grep -q '"/rsvp_responses"'
 
           echo "✅ Verification successful. The 'rsvp_responses' table was found in the API schema."
