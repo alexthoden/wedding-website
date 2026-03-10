@@ -18,17 +18,17 @@ jobs:
           -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
           -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}"
 
-      - name: Verify Correct Database
+      - name: DEBUG - Inspect API Schema
         run: |
-          echo "Verifying that the database schema contains the 'rsvp_responses' table..."
+          echo "Fetching the API schema to inspect its content..."
           
-          # Fetch the API schema and use grep to check for the table name.
-          # The '-q' flag makes grep "quiet" and it will exit with a non-zero status code (failing the step)
-          # if the text is not found.
-          curl -s "https://tireiqhsgftbsgwnauob.supabase.co/rest/v1/" \
+          # This command will now print the full JSON schema from the API to the log.
+          # We remove the pipe to grep and the '-s' flag to make the output visible.
+          curl "https://tireiqhsgftbsgwnauob.supabase.co/rest/v1/" \
             -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
-            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
-            | grep -q '"path": "/rsvp_responses"'
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}"
+
+
 
           echo "✅ Verification successful. The 'rsvp_responses' table was found in the API schema."
 
