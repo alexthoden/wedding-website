@@ -4,6 +4,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 const FAQPage = () => {
   const faqs = [
     {
+      question: "Is there a hotel block reservered for guests?",
+      answer: "Yes! We have reserved a block of rooms at Home2 Suites in Leesburg, which is about a 20 minute drive from the venue. We will be providing transportation to and from the venue and this hotel for those interested. Please let us know if you would like to take advantage of this option when you RSVP!"
+    },
+    {
       question: "What times are the busses running?",
       answer: "The busses will leave Home2 Suites in Leesburg at 4:30 PM and will start making return trips every hour starting at 8:30 PM until 10:30 PM. If you are staying at the hotel, we recommend taking the bus to and from the venue to avoid parking hassles and ensure a safe ride home after the celebration!"
     },

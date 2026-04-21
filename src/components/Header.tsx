@@ -15,7 +15,7 @@ const Header = () => {
     { label: 'Photos', path: '/photos' },
     { label: 'Things To Do', path: '/things-to-do' },
     { label: 'Registry', path: '/registry' },
-    { label: 'FAQ', path: '/faq' },
+    { label: 'FAQ/Hotel', path: '/faq' },
     { label: 'RSVP', path: '/rsvp' }
   ];
 
