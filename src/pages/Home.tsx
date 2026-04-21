@@ -193,6 +193,10 @@ const Home = () => {
                   <h4 className="font-semibold text-wedding-sage mb-2">Parking</h4>
                   <p className="text-gray-700">Free parking available on-site. Bus service will be provided from hotel block.</p>
                 </div>
+                <div>
+                  <h4 className="font-semibold text-wedding-sage mb-2">Hotel</h4>
+                  <p className="text-gray-700">A block of rooms has been reserved at Home2 Suites in Leesburg. We will be providing transportation to and from the venue and this hotel for those interested.</p>
+                </div>
               </CardContent>
             </Card>
           </div>
