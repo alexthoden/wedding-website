@@ -36,7 +36,7 @@ const Registry = () => {
             Your presence is the greatest gift! If you wish to bless us with something extra, here are our registries:
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
           {registries.map((reg) => (
             <a
               key={reg.name}
@@ -57,7 +57,7 @@ const Registry = () => {
           <div className="bg-white/90 backdrop-blur-sm rounded-lg p-8 border border-wedding-peach inline-block">
             <h3 className="font-serif text-xl font-semibold text-wedding-coral mb-4">Thank You!</h3>
             <p className="text-gray-700 mb-4">
-              We are so grateful for your love and support as we start our life together.
+              We are so grateful for your love and support as we start our life together!
             </p>
           </div>
         </div>
