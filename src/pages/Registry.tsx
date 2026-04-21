@@ -36,7 +36,7 @@ const Registry = () => {
             Your presence is the greatest gift! If you wish to bless us with something extra, here are our registries:
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
+        <div className="grid grid-cols-1 gap-8 max-w-md mx-auto">
           {registries.map((reg) => (
             <a
               key={reg.name}
