@@ -191,10 +191,20 @@ const Home = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-wedding-sage mb-2">Parking</h4>
+                  
                   <p className="text-gray-700">Free parking available on-site. Bus service will be provided from hotel block.</p>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-wedding-sage mb-2">Hotel</h4>
+                  {/* <h4 className="font-semibold text-wedding-sage mb-2"><a href="https://www.hilton.com/en/hotels/iadleht-home2-suites-leesburg/?SEO_id=GMB-AMER-HT-IADLEHT&y_source=1_ODE0MDczNzYtNzE1LWxvY2F0aW9uLndlYnNpdGU%3D">Hotel</a></h4> */}
+                  <h4 className="font-semibold text-wedding-sage mb-2">
+                    <a 
+                      href="https://www.hilton.com/en/hotels/iadleht-home2-suites-leesburg/?SEO_id=GMB-AMER-HT-IADLEHT&y_source=1_ODE0MDczNzYtNzE1LWxvY2F0aW9uLndlYnNpdGU%3D" 
+                      className="text-blue-700 underline hover:text-blue-800 visited:text-purple-700"
+                    >
+                      Hotel
+                    </a>
+                  </h4>
+
                   <p className="text-gray-700">A block of rooms has been reserved at Home2 Suites in Leesburg. We will be providing transportation to and from the venue and this hotel for those interested.</p>
                 </div>
               </CardContent>
