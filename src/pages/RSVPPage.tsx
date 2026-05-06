@@ -337,7 +337,7 @@ const RSVPPage = () => {
                     <div>
                       <p className="text-sm font-medium text-wedding-blue">Guest List Verification</p>
                       <p className="text-sm text-gray-600 mt-1">
-                        Please enter your full name as it appears on your invitation to access the RSVP form.
+                        Please enter your name: First Last (e.g. "Alex Thoden") to access the RSVP form.
                       </p>
                     </div>
                   </div>
