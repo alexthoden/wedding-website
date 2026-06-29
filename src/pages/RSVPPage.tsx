@@ -214,7 +214,9 @@ const RSVPPage = () => {
         const groupLeader = groupGuests[0];
 
         const responseData = {
-          guest_email: formData.email?.toLowerCase() || null,
+          guest_email: Object.values(formData.attendance).every(val => val === 'no')
+            ? 'alexhokietho@gmail.com'
+            : (formData.email?.toLowerCase() || null),
           guest_name: guest.name,
           attendance: formData.attendance[guest.name],
           dietary_restrictions: formData.dietaryRestrictions || null,
